@@ -1,0 +1,12 @@
+FROM golang:latest AS build
+
+WORKDIR /go/src
+COPY ./main.go ./
+RUN go mod init fullcycle
+RUN go build -o fullcycle
+
+FROM scratch
+
+COPY --from=build /go/src/fullcycle .
+ENTRYPOINT ["./fullcycle"]
+
