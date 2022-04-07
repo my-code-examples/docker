@@ -13,7 +13,7 @@ const connection = mysql.createConnection(config)
 
 const sql = `INSERT INTO people(name) values ('Roger Oliveira')`
 connection.query(sql)
-const result = connection.query(sql)
+connection.query(sql)
 connection.end()
 
 app.get("/", (req, res) => {
