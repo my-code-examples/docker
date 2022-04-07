@@ -23,3 +23,5 @@ Divirta-se.
 2. Copiei o programa em Go da minha maquina para dentro de uma imagem baseada em Go.
 3. Fiz o build do programa dentro da imagem Go, resultando em um binário.
 4. Joguei o binário pra dentro de uma nova imagem baseada em Scratch que tem menos de 2MB.
+
+[Link da imagem no Dockerhub](<https://hub.docker.com/repository/docker/rogerpoliver/codeeducation>)
