@@ -13,7 +13,9 @@ services:
     volumes: 
       - ./node:/usr/src/app
     tty: true
-    command: npm run start
+    command: >
+      bash -c "npm run start
+      && npm start"
     depends_on: 
       - db
 
@@ -40,7 +42,7 @@ services:
     networks: 
       - node-network
     ports:
-      - "80:8080"
+      - "8080:80"
     depends_on:
       - db
       - app
