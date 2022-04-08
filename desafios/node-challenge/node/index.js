@@ -4,20 +4,27 @@ const db = require("./db")
 const app = express()
 const port = 3000
 
-app.get("/", async (req, res) => {
+async function returnNamesHTML() {
   const names = await db.selectNames()
-
-  function returnNamesHTML() {
-    let html =
-      `<h1>FullCycle Rocks!<h1>    
+  let html =
+    `<h1>FullCycle Rocks!<h1>    
        <p>Para adicionar um novo valor no banco de dados, faça uma request para /add/:name</p>
        <h3>Tabela People - MySql</h3><ol>`
-    names.map(name => { html += `<li>${name.name}</li>` })
-    html += `</ol>`
-    return html
-  }
+  names.map(name => { html += `<li>${name.name}</li>` })
+  html += `</ol>`
+  return html
+}
 
-  res.send(returnNamesHTML())
+app.get("/", async (req, res) => {
+  const people = await db.tablePeopleExists()
+
+  if (people) {
+    res.send(await returnNamesHTML())
+  } else {
+    await db.createTablePeople()
+    await db.insertName("Roger Oliveira")
+    res.send(await returnNamesHTML())
+  }
 })
 
 app.get("/add/:name", async (req, res) => {

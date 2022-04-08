@@ -30,6 +30,23 @@ async function insertName(name) {
     await conn.query(query, value)
 }
 
-module.exports = { selectNames, insertName }
+async function tablePeopleExists() {
+    const conn = await connect()
+    const [rows] = await conn.query("SHOW TABLES LIKE 'people';")
+    return rows.length > 0
+}
+
+async function createTablePeople() {
+    const conn = await connect()
+    const query = "CREATE TABLE people (id INT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255));"
+    await conn.query(query)
+}
+
+module.exports = {
+    selectNames,
+    insertName,
+    tablePeopleExists,
+    createTablePeople
+}
 
 
