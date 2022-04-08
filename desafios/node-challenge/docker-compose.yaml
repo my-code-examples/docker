@@ -14,8 +14,8 @@ services:
       - ./node:/usr/src/app
     tty: true
     command: >
-      bash -c "npm run start
-      && npm start"
+      bash -c "npm install
+      && npm run start"
     depends_on: 
       - db
 
